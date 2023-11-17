@@ -1,16 +1,63 @@
 # Comparison of algorithms for behabioral learning on Evolution Gym
 
-## requrements
+## abstract
+[Evolution Gym](https://evolutiongym.github.io/)で、ロボットの制御学習のためのアルゴリズムを比較する。
+Evolution Gymには32のタスクが用意されており、それらに指定したロボットの構造の制御方法を比較することができる。  
+制御方法を学習するアルゴリズムが、タスクとロボット構造の組み合あわせに対して、どのように働くかを実験することを目的として作成した。学習アルゴリズムとしてNEAT、HyperNEAT、PPOの3つを提供し、全てニューラルネットワークによってロボットを制御する。
+
+### samples
+以下に、各アルゴリズムの実験で得られた結果のサンプルを示す。
+- task: Walker-v0  
+  - algo: NEAT  
+![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Walker-v0_ppo-opt_neat.gif)
+  - algo: HyperNEAT  
+![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Walker-v0_ppo-opt_hyper.gif)
+  - algo: PPO  
+![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Walker-v0_ppo-opt_ppo.gif)
+
+- task: PlatformJumper-v0
+  - algo: NEAT  
+  ![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/PlatformJumper-v0_hand_neat.gif)
+  - algo: HyperNEAT  
+  ![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/PlatformJumper-v0_hand_hyper.gif)
+  - algo: PPO  
+  ![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/PlatformJumper-v0_hand_ppo.gif)
+
+- task: Climber-v0
+  - algo: NEAT, HyperNEAT, PPO  
+  <img src="https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Climber-v0_hand_neat.gif" width="10%" height="10%"> <img src="https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Climber-v0_hand_hyper.gif" width="10%" height="10%"> <img src="https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Climber-v0_hand_ppo.gif" width="10%" height="10%">
+
+- task: Flipper-v0
+  - algo: NEAT
+  ![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Flipper-v0_ppo-opt_neat.gif)
+  - algo: HyperNEAT
+  ![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Flipper-v0_ppo-opt_hyper.gif)
+  - algo: PPO
+  ![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Flipper-v0_ppo-opt_ppo.gif)
+
+- task: Thrower-v0
+  - algo: NEAT
+  ![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Thrower-v0_hand_neat.gif)
+  - algo: HyperNEAT
+  ![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Thrower-v0_hand_hyper.gif)
+  - algo: PPO
+  ![](https://github.com/sttkm/ComparisonOnEvogym/blob/main/gifs/Thrower-v0_hand_ppo.gif)
+
+
+
+
+## Experiment
+
+### requrements
 - Python 3.8.12
 - [Evolution Gym](https://evolutiongym.github.io/tutorials/getting-started.html)
 
-
-## NEAT
-### execution
+### NEAT
+#### execution
 ```
 $python run_neat.py
 ```
-#### options:
+##### options:
 | option      | abbrev  | default         | detail  |
 | :---        | :---:   | :---:           | :---    |
 | --name      | -n      | "{task}_{robot}"| experiment name |
@@ -23,13 +70,13 @@ $python run_neat.py
 | --view      |         | *false*         | open simulation window of best robot |
 
 
-### make gif
+#### make gif
 after run_neat, make gif file for each of all genomes written in reward history file.
 output to "./out/evogym_neat/{expt name}/gif/"
 ```
 $python make_gifs_neat.py {experiment name}
 ```
-#### options:
+##### options:
 | option              | abbrev  | default | detail  |
 | :---                | :---:   | :---:   | :---    |
 |                     |         |         | name of experiment for making figures |
@@ -40,12 +87,12 @@ $python make_gifs_neat.py {experiment name}
 | --no-multi          |         | *false* | do without using multiprocessing. if error occur, try this option. |
 
 
-## HyperNEAT
-### execution
+### HyperNEAT
+#### execution
 ```
 $python run_hyper.py
 ```
-#### options:
+##### options:
 | option      | abbrev  | default         | detail  |
 | :---        | :---:   | :---:           | :---    |
 | --name      | -n      | "{task}_{robot}"| experiment name |
@@ -59,13 +106,13 @@ $python run_hyper.py
 | --view      |         | *false*         | open simulation window of best robot |
 
 
-### make gif
+#### make gif
 after run_hyper, make gif file for each of all genomes written in reward history file.
 output to "./out/evogym_hyper/{expt name}/gif/"
 ```
 $python make_gifs_hyper.py {experiment name}
 ```
-#### options:
+##### options:
 | option              | abbrev  | default | detail  |
 | :---                | :---:   | :---:   | :---    |
 |                     |         |         | name of experiment for making figures |
@@ -77,12 +124,12 @@ $python make_gifs_hyper.py {experiment name}
 
 
 
-## PPO
-### execution
+### PPO
+#### execution
 ```
 $python run_ppo.py
 ```
-#### options:
+##### options:
 | option          | abbrev  | default         | detail  |
 | :---            | :---:   | :---:           | :---    |
 | --name          | -n      | "{task}_{robot}"| experiment name |
@@ -100,13 +147,13 @@ $python run_ppo.py
 | --view          |         | *false*         | open simulation window of best robot |
 
 
-### make figure
+#### make figure
 after run_ppo, make gif file for each of all controllers.
 output to "./out/evogym_ppo/{expt name}/gif/"
 ```
 $python make_gifs_ppo.py {experiment name}
 ```
-#### options:
+##### options:
 | option              | abbrev  | default | detail  |
 | :---                | :---:   | :---:   | :---    |
 |                     |         |         | name of experiment for making figures |
